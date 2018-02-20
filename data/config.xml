@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Location name="FedorMap" id="1286">
+  <Description>
+    <![CDATA[]]>
+  </Description>
+  <Sublocation name="Floor_1" id="2410">
+    <Files>
+      <File type="PNG" name="2410.png" />
+      <File type="BMP" name="2410.bmp" />
+      <File type="BMP2" name="barriers.2410.bmp2.bmp" />
+    </Files>
+    <Metrics width_meters="96.06706" height_meters="54.03772" />
+    <GPS latitude_deg="55.000592072807" longitude_deg="36.997940540314" azimuth_deg="30" magnetic_declination_deg="0" />
+  </Sublocation>
+  <Sublocation name="Floor_2" id="2519">
+    <Files>
+      <File type="SVG" name="2519.svg" />
+      <File type="BMP" name="2519.bmp" />
+      <File type="BMP2" name="barriers.2519.bmp2.bmp" />
+    </Files>
+    <Metrics width_meters="105.25889" height_meters="67.04847" />
+    <GPS latitude_deg="59.000022216817" longitude_deg="30.002047419548" azimuth_deg="0" magnetic_declination_deg="0" />
+  </Sublocation>
+  <Files>
+    <File type="graph:xml" name="graph.xml" tag="default" />
+    <File type="graph:xml" name="graph_alternative.xml" tag="alternative" />
+  </Files>
+</Location>
