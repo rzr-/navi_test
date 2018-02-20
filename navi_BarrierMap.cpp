@@ -89,7 +89,6 @@ Barrier *BarrierMap::getBarrier (int subloc_id, int barrier_id) {
 /***************
 Лучше возрващать указатель, так лишняя копия вектора получается
 ***************/
-
 vector <Barrier> BarrierMap::getBarriers (int subloc_id) {
 	vector <Barrier> resultBarriers;
 	int size = barriers.size();
@@ -105,7 +104,7 @@ vector <Barrier> BarrierMap::getBarriers(int subloc_id, double x, double y) {
 	int cn = 0; // the  crossing number counter
 	int size = barriers.size();
 	/***************
-		normalize x, y -> kx, ky !!!			
+		x, y -> kx, ky !!!			
 	***************/
 	for (int k=0; k<size; k++) {
 		if (barriers[k].subloc_id == subloc_id) {
@@ -157,7 +156,7 @@ double BarrierMap::intersects(int subloc_id, double x1, double y1, double x2, do
 	int size = barriers.size();
 
 	/***************	
-	normalize x, y -> kx, ky !!!  
+	x, y -> kx, ky !!!  
 	***************/
 
 	dx = x2 - x1;
