@@ -1,5 +1,5 @@
 #include <vector>
-#include <string>
+//#include <string>
 
 #include "navi_SubLoc.h"
 #include "navi_Barrier.h"
@@ -9,7 +9,6 @@ class BarrierMap {
 		std::vector <Barrier> barriers;
 		std::vector <SubLoc> sublocs;
 
-		BarrierMap () { }
 		void parse (const char* configXml, const char* barriersXml);
 		Barrier *getBarrier (int subloc_id, int barrier_id);
 		std::vector <Barrier> getBarriers (int subloc_id);

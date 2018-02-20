@@ -44,7 +44,7 @@ void BarrierMap::parse (const char* configXml, const char* barriersXml) {
 			pSublocations = pRoot->FirstChildElement("Sublocation");
 			while(pSublocations) {
 				Barrier b;
-				b.subloc_id = atoi (pSublocations->Attribute("id")); //subloc_id
+				b.subloc_id = atoi (pSublocations->Attribute("id"));
 				pBarriers = pSublocations->FirstChildElement("Barrier");
 				while (pBarriers) {
 					b.id = atoi (pBarriers->Attribute("id"));
@@ -85,6 +85,10 @@ Barrier *BarrierMap::getBarrier (int subloc_id, int barrier_id) {
 	printf ("Not found\n");
 	return NULL;
 }
+
+/***************
+Лучше возрващать указатель, так лишняя копия вектора получается
+***************/
 
 vector <Barrier> BarrierMap::getBarriers (int subloc_id) {
 	vector <Barrier> resultBarriers;
@@ -223,7 +227,7 @@ string BarrierMap::toString() const {
 	doc.LinkEndChild( decl );  
 
 	TiXmlElement *root = new TiXmlElement( "Location" ); 
-	root->SetAttribute("id", sublocs[0].location_id);/**/
+	root->SetAttribute("id", sublocs[0].location_id);
 
 	doc.LinkEndChild( root ); 
 
@@ -253,5 +257,10 @@ string BarrierMap::toString() const {
 		root->LinkEndChild( Sublocation );
 	}
 	doc.SaveFile( "data/new_barriers.xml" );
-	return "data/new_barriers.xml";
+
+	TiXmlPrinter printer;
+	printer.SetIndent( "\t" );
+	doc.Accept( &printer );
+	//fprintf( stdout, "%s", printer.CStr() );
+	return printer.CStr();
 }

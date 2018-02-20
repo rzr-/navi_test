@@ -1,4 +1,3 @@
-#include <iostream>
 #include <cstdio>
 #include <vector>
 #include <string>
@@ -10,17 +9,21 @@
 using namespace std;
 
 int main () {
-	BarrierMap m;
-	m.parse ("data/config.xml", "data/barriers.xml");
+	BarrierMap *m = new BarrierMap();
+	m->parse ("data/config.xml", "data/barriers.xml");
 
-	Barrier *b = m.getBarrier (2410, 607095); //Found
-	b = m.getBarrier(2420, 607095); //Not Found
-	if (b)
-		cout << b->type.c_str() << endl;
+	Barrier *b = m->getBarrier (2410, 607095); //Found
+	if (b)	printf ("Type of barrier: %s\n", b->type.c_str() );
 
-	string filename = m.toString();
-	vector <Barrier> resultBarriers = m.getBarriers (2410);
-	printf ("%s\n", filename.c_str());
+	b = m->getBarrier(2420, 607095); //Not Found
+	if (b)	printf ("%s\n", b->type.c_str() );
+
+	vector <Barrier> resultBarriers = m->getBarriers (2410);
+	
+	printf ("%s\n", m->toString().c_str());
+
+	resultBarriers.clear();
+	delete m;
 }
 
 //g++ -c navi_main.cpp && g++ -c navi_BarrierMap.cpp && g++  navi_BarrierMap.o navi_main.o -o navi
