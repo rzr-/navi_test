@@ -3,7 +3,6 @@
 #include <string>
 #include <stdlib.h>
 
-//#include "navi_Barrier.h"
 #include "navi_BarrierMap.h"
 
 using namespace std;
@@ -26,4 +25,4 @@ int main () {
 	delete m;
 }
 
-//g++ -c navi_main.cpp && g++ -c navi_BarrierMap.cpp && g++  navi_BarrierMap.o navi_main.o -o navi
+//g++ navi_main.cpp navi_BarrierMap.cpp -o navi && ./navi

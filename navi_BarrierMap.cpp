@@ -107,13 +107,10 @@ vector <Barrier> BarrierMap::getBarriers(int subloc_id, double x, double y) {
 	/***************
 		normalize x, y -> kx, ky !!!			
 	***************/
-	// crossing number test for a point in a polygon
-	// Return:  0 = outside, 1 = inside
-	// This code is patterned after [Franklin, 2000]
 	for (int k=0; k<size; k++) {
 		if (barriers[k].subloc_id == subloc_id) {
 			// loop through all edges of the polygon
-			for (int i=0; i<barriers[k].coords_kx.size()-1; i++)   // edge from barriers[i]  to barriers[i+1]
+			for (int i=0; i<barriers[k].coords_kx.size()-1; i++)   // edge from barriers.coord_kx[i] to barriers.coord_kx[i+1]
 				if (
 				   ( (barriers[k].coords_kx[i].y <= y) && (barriers[k].coords_kx[i+1].y > y) ) || // an upward crossing
 				   ( (barriers[k].coords_kx[i].y > y)  && (barriers[k].coords_kx[i+1].y <=  y) )  // a downward crossing
@@ -137,7 +134,6 @@ Returns:
 	1 - отрезок (x1,y1) - (x2,y2) не пересекает барьер;
 	coef [0,1] - отрезок (x1,y1) - (x2,y2) пересекает барьер в точке (x1 + k*(x2-x1), y1 + k*(y2-y1))
 **********/
-
 double BarrierMap::intersects(int subloc_id, double x1, double y1, double x2, double y2) {
 	bool nan = true;
 
@@ -186,7 +182,7 @@ double BarrierMap::intersects(int subloc_id, double x1, double y1, double x2, do
 				m2 = _dy / _dx;
 				c2 = _y2 - m2 * _x2; 
 				//if( (m1 - m2) == 0)
-				//	printf ("No intersection\n"); //No intersection
+				//	printf ("No intersection\n");
 				if (m1 - m2 != 0) {
 					intersection_X = (c2 - c1) / (m1 - m2);
 					intersection_Y = m1 * intersection_X + c1;
@@ -196,16 +192,15 @@ double BarrierMap::intersects(int subloc_id, double x1, double y1, double x2, do
 
 				// inside or not
 				if (
-				   ( (barriers[k].coords_kx[i].y <= y1) && (barriers[k].coords_kx[i+1].y > y1) ) || // an upward crossing
-				   ( (barriers[k].coords_kx[i].y > y1)  && (barriers[k].coords_kx[i+1].y <=  y1) )  // a downward crossing
+				   ( (barriers[k].coords_kx[i].y <= y1) && (barriers[k].coords_kx[i+1].y > y1) ) ||
+				   ( (barriers[k].coords_kx[i].y > y1)  && (barriers[k].coords_kx[i+1].y <=  y1) ) 
 				   ) { 
-					// compute  the actual edge-ray intersect x-coordinate
+
 					double vt = (double) (y1  - barriers[k].coords_kx[i].y) / (barriers[k].coords_kx[i+1].y - barriers[k].coords_kx[i].y);
-					if (x1 <  barriers[k].coords_kx[i].x + vt * (barriers[k].coords_kx[i+1].x - barriers[k].coords_kx[i].x)) // x < intersect
-						 ++cn;   // a valid crossing of y=y right of x
+					if (x1 <  barriers[k].coords_kx[i].x + vt * (barriers[k].coords_kx[i+1].x - barriers[k].coords_kx[i].x)) 
+						 ++cn; 
 				}
 			}
-				
 			if (cn&1) inside = true;
 		}
 	}
@@ -228,7 +223,6 @@ string BarrierMap::toString() const {
 
 	TiXmlElement *root = new TiXmlElement( "Location" ); 
 	root->SetAttribute("id", sublocs[0].location_id);
-
 	doc.LinkEndChild( root ); 
 
 	int i, j, k;
