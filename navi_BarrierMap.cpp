@@ -177,7 +177,8 @@ vector <Barrier> BarrierMap::getBarriers (int subloc_id, double x, double y) {
 		//is inside
 		bool result = false;
 		int j = _barriers[k].coords_kx.size() - 1;
-			
+		
+		// ray casting method	
 		for (int i = 0; i < _barriers[k].coords_kx.size(); i++) {
 			double p = _barriers[k].coords_kx[i].x + (y - _barriers[k].coords_kx[i].y) / (_barriers[k].coords_kx[j].y - _barriers[k].coords_kx[i].y) * (_barriers[k].coords_kx[j].x - _barriers[k].coords_kx[i].x);
 			bool comp1 = (comp(_barriers[k].coords_kx[i].y, y) == 1),
@@ -406,6 +407,7 @@ double BarrierMap::intersects (int subloc_id, double x1, double y1, double x2, d
 			// == ->  0
 			// >  -> -1
 
+			// ray casting method
 			double p = _barriers[k].coords_kx[i].x + (y1 - _barriers[k].coords_kx[i].y) / (_barriers[k].coords_kx[j].y - _barriers[k].coords_kx[i].y) * (_barriers[k].coords_kx[j].x - _barriers[k].coords_kx[i].x);
 			bool comp1 = (comp(_barriers[k].coords_kx[i].y, y1) == 1),
 				 comp2 = (comp(_barriers[k].coords_kx[j].y, y1) != 1),
